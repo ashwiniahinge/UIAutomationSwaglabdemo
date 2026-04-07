@@ -8,6 +8,21 @@ Playwright end-to-end tests for Sauce Labs demo application (https://www.saucede
 - **Git** — [Download](https://git-scm.com/)
 - npm (bundled with Node.js)
 
+## Tools and Frameworks
+
+This project uses the following tools and frameworks:
+
+- **Playwright** — End-to-end testing framework for web and API automation
+- **Node.js** — JavaScript runtime environment
+- **TypeScript** — Typed superset of JavaScript for better code quality
+- **GitHub Actions** — CI/CD pipeline for automated testing
+- **npm** — Package manager for Node.js dependencies
+
+**Key Dependencies:**
+- `@playwright/test` — Core testing framework
+- `typescript` — TypeScript compiler
+- `@types/node` — TypeScript definitions for Node.js
+
 ## Installation
 
 Clone the repository:
@@ -93,19 +108,58 @@ package.json                       # Dependencies & scripts
 
 ## API Testing
 
-This project includes API automation tests for the [Petstore API](https://petstore.swagger.io/).
+This project includes API automation tests for the [Petstore API](https://petstore.swagger.io/) using Playwright's request context.
 
-**API Test Coverage:**
-- ✅ Create new pet (POST /pet)
-- ✅ Get pet by ID (GET /pet/{id})
-- ✅ Update pet (PUT /pet)
-- ✅ Find pets by status (GET /pet/findByStatus)
-- ✅ Delete pet (DELETE /pet/{id})
+### How to Run API Test Cases
 
-Run API tests:
+Run all API tests:
 ```bash
 npx playwright test --project=api
 ```
+
+Run API tests in verbose mode:
+```bash
+npx playwright test --project=api --reporter=line
+```
+
+Run a specific API test:
+```bash
+npx playwright test api-tests/PetstoreAPI.test.ts --grep "Create a new pet"
+```
+
+Run API tests with debugging:
+```bash
+npx playwright test --project=api --debug
+```
+
+### API Endpoints Covered
+
+The API tests cover the following Petstore endpoints:
+
+| Endpoint | Method | Description | Test Status |
+|----------|--------|-------------|-------------|
+| `/pet` | POST | Create a new pet | ✅ Covered |
+| `/pet/{petId}` | GET | Get pet by ID | ✅ Covered |
+| `/pet` | PUT | Update an existing pet | ✅ Covered |
+| `/pet/findByStatus` | GET | Find pets by status | ✅ Covered |
+| `/pet/{petId}` | DELETE | Delete a pet | ✅ Covered |
+
+### API Test Details
+
+**Test File:** `api-tests/PetstoreAPI.test.ts`
+
+**Test Cases:**
+1. **Create a new pet** — Validates pet creation with all required fields
+2. **Get pet by ID** — Retrieves and validates pet data by ID
+3. **Update pet** — Updates pet information and verifies changes
+4. **Find pets by status** — Searches pets by availability status
+5. **Delete pet** — Removes pet and validates deletion
+
+**Base URL:** `https://petstore.swagger.io/v2`
+
+**Data Format:** JSON
+
+**Authentication:** None required (public API)
 
 ## Test Users
 
