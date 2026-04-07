@@ -49,6 +49,12 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
 
+    {
+      name: 'api',
+      testDir: './api-tests',
+      use: { ...devices['Desktop Chrome'] }, // API tests don't need browser, but required
+    },
+
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',

@@ -43,9 +43,14 @@ Run a single test file:
 npx playwright test tests/Login-Logout.test.ts
 ```
 
-Run tests in specific browser:
+Run API tests only:
 ```bash
-npx playwright test --project=chromium
+npx playwright test --project=api
+```
+
+Run both UI and API tests:
+```bash
+npx playwright test
 ```
 
 View test report:
@@ -79,8 +84,27 @@ tests/
 ├── ErrorUse.test.ts              # Error user account (SKIPPED - see Known Issues)
 └── visual_user.test.ts           # Visual user account (SKIPPED - see Known Issues)
 
+api-tests/
+└── PetstoreAPI.test.ts           # Petstore API CRUD operations
+
 playwright.config.ts              # Playwright configuration
 package.json                       # Dependencies & scripts
+```
+
+## API Testing
+
+This project includes API automation tests for the [Petstore API](https://petstore.swagger.io/).
+
+**API Test Coverage:**
+- ✅ Create new pet (POST /pet)
+- ✅ Get pet by ID (GET /pet/{id})
+- ✅ Update pet (PUT /pet)
+- ✅ Find pets by status (GET /pet/findByStatus)
+- ✅ Delete pet (DELETE /pet/{id})
+
+Run API tests:
+```bash
+npx playwright test --project=api
 ```
 
 ## Test Users
