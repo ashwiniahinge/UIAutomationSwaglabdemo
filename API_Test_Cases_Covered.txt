@@ -1,0 +1,116 @@
+API TEST CASES COVERED
+=====================
+
+This document outlines all API test cases covered in the automation suite for Petstore API (https://petstore.swagger.io/).
+
+FRAMEWORK: Playwright API Testing with TypeScript
+BASE URL: https://petstore.swagger.io/v2
+TEST LOCATION: api-tests/ folder
+AUTHENTICATION: None required (public API)
+
+================================================================================
+
+PETSTORE API ENDPOINTS COVERED:
+
+1. CREATE PET (POST /pet)
+   - Test Case: Create a new pet
+   - Description: Test creation of new pet with all required fields
+   - Request Body:
+     * id: Unique timestamp-based ID
+     * category: { id: 1, name: "Dogs" }
+     * name: "Buddy"
+     * photoUrls: Array of URLs
+     * tags: Array of tag objects
+     * status: "available"
+   - Validations:
+     * Response status: 200
+     * Response contains correct pet ID
+     * Response contains correct pet name
+     * Response contains correct status
+
+2. GET PET BY ID (GET /pet/{petId})
+   - Test Case: Get pet by ID
+   - Description: Retrieve pet information using pet ID
+   - Pre-condition: Pet must be created first
+   - Path Parameter: petId (unique timestamp)
+   - Validations:
+     * Response status: 200
+     * Response contains correct pet ID
+     * Response contains correct pet name
+     * Response contains pet data structure
+
+3. UPDATE PET (PUT /pet)
+   - Test Case: Update pet
+   - Description: Update existing pet information
+   - Pre-condition: Pet must be created first
+   - Request Body: Modified pet object with updated fields
+     * name: "Buddy Updated"
+     * status: "sold"
+   - Validations:
+     * Response status: 200
+     * Response contains updated name
+     * Response contains updated status
+
+4. FIND PETS BY STATUS (GET /pet/findByStatus)
+   - Test Case: Find pets by status
+   - Description: Search pets by availability status
+   - Query Parameter: status=available
+   - Validations:
+     * Response status: 200
+     * Response is an array
+     * Array contains pet objects (if any exist)
+
+5. DELETE PET (DELETE /pet/{petId})
+   - Test Case: Delete pet
+   - Description: Remove pet from system
+   - Pre-condition: Pet must be created first
+   - Path Parameter: petId (unique timestamp)
+   - Validations:
+     * Response status: 200
+     * Pet deletion confirmed (may return 200 or 404 on subsequent GET)
+
+================================================================================
+
+API TEST ARCHITECTURE:
+
+TEST ISOLATION:
+- Each test uses unique pet IDs (timestamp-based) to avoid conflicts
+- Tests are independent and can run in parallel
+- No shared state between test executions
+
+DATA MANAGEMENT:
+- Test data is generated dynamically
+- No hardcoded IDs or names
+- Cleanup handled within tests
+
+ASSERTIONS:
+- HTTP status code validation
+- Response body structure validation
+- Data integrity checks
+- Error handling verification
+
+================================================================================
+
+TEST EXECUTION:
+
+RUN ALL API TESTS:
+npx playwright test --project=api
+
+RUN SPECIFIC API TEST:
+npx playwright test api-tests/PetstoreAPI.test.ts --grep "Create a new pet"
+
+RUN WITH VERBOSE OUTPUT:
+npx playwright test --project=api --reporter=line
+
+DEBUG API TESTS:
+npx playwright test --project=api --debug
+
+================================================================================
+
+CURRENT STATUS:
+- 5 API test cases implemented
+- All tests passing (100% success rate)
+- Tests run independently without conflicts
+- No external dependencies or authentication required
+
+================================================================================

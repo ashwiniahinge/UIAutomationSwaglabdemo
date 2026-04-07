@@ -1,0 +1,104 @@
+UI TEST CASES COVERED
+======================
+
+This document outlines all UI test cases covered in the automation suite for Sauce Labs Demo application (https://www.saucedemo.com/).
+
+FRAMEWORK: Playwright with TypeScript
+BROWSERS: Chromium, Firefox, WebKit
+TEST LOCATION: tests/ folder
+
+================================================================================
+
+1. LOGIN-LOGOUT TEST (Login-Logout.test.ts)
+   - Test User: standard_user
+   - Scenario: Login with valid credentials and logout
+   - Steps:
+     * Navigate to login page
+     * Enter username and password
+     * Click login button
+     * Verify successful login (products page)
+     * Open menu and click logout
+     * Verify logout (back to login page)
+
+2. STANDARD USER CHECKOUT (StandardUsercheckout.test.ts)
+   - Test User: standard_user
+   - Scenario: Complete purchase flow from login to checkout
+   - Steps:
+     * Login with standard user
+     * Add item to cart (Sauce Labs Backpack)
+     * Navigate to cart
+     * Proceed to checkout
+     * Fill checkout information (name, address)
+     * Complete checkout
+     * Verify order completion
+     * Return to products page
+     * Logout
+
+3. BROWSER CATALOGUE (Browsecatalogue.test.ts)
+   - Test User: standard_user
+   - Scenario: Browse and sort products, add multiple items
+   - Steps:
+     * Login with standard user
+     * Add first item to cart
+     * Sort products by price (low to high)
+     * Add second item
+     * Sort products by price (high to low)
+     * Add third item
+     * Sort products alphabetically (Z to A)
+     * Add fourth item
+     * Navigate to cart
+
+4. PROBLEM USER TEST (ProblemUser.test.ts)
+   - Test User: problem_user
+   - Scenario: Test application behavior with problematic user account
+   - Steps:
+     * Login with problem user (experiences issues)
+     * Navigate through product catalog
+     * Attempt various actions that may fail or behave unexpectedly
+
+5. LOCKED OUT USER (locked_out_user.test.ts)
+   - Test User: locked_out_user
+   - Scenario: Verify locked account behavior
+   - Steps:
+     * Attempt login with locked user
+     * Verify error message for locked account
+     * Confirm user cannot access application
+
+6. ERROR USER TEST (ErrorUse.test.ts) - CURRENTLY SKIPPED
+   - Test User: error_user
+   - Scenario: Test error handling and edge cases
+   - Status: Skipped due to element timing issues
+   - Steps:
+     * Login with error user
+     * Attempt checkout flow
+     * Verify error messages and handling
+
+7. VISUAL USER TEST (visual_user.test.ts) - CURRENTLY SKIPPED
+   - Test User: visual_user
+   - Scenario: Test visual elements and UI consistency
+   - Status: Skipped due to element visibility issues in WebKit
+   - Steps:
+     * Login with visual user
+     * Add multiple products to cart
+     * Complete checkout with multiple items
+     * Verify visual elements and layout
+
+================================================================================
+
+TEST USERS USED:
+- standard_user: Normal user account for positive test flows
+- problem_user: Account with intentional issues for negative testing
+- locked_out_user: Account that cannot login (403 error)
+- error_user: Account that triggers errors (currently skipped)
+- visual_user: Account for visual testing (currently skipped)
+
+BROWSER COVERAGE:
+- All tests run on Chromium, Firefox, and WebKit browsers
+- Cross-browser compatibility verification
+
+CURRENT STATUS:
+- 15 tests passing across all browsers
+- 6 tests skipped (2 test files)
+- Total: 21 test executions per browser
+
+================================================================================
