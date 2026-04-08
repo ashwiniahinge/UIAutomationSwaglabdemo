@@ -222,6 +222,5 @@ npx playwright test tests/YourTest.test.ts --debug
 
 ## References
 
-- [Playwright Documentation](https://playwright.dev)
 - [Sauce Labs Demo App](https://www.saucedemo.com/)
 - [GitHub Actions](https://docs.github.com/en/actions)
